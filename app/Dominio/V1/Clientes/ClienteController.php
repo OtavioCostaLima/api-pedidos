@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
+
+    protected $clienteRepository;
+
+    public function __construct(ClienteRepository $clienteRepository)
+    {
+        $this->clienteRepository = $clienteRepository;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +23,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->clienteRepository->getClientes();
     }
 
     /**
@@ -33,9 +32,10 @@ class ClienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClienteRequest $request)
     {
-        //
+        $params = $request->except('data_excluido');
+        return $this->clienteRepository->cadastrar($params);
     }
 
     /**
@@ -46,18 +46,7 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->clienteRepository->getClientePorId($id);
     }
 
     /**
@@ -69,7 +58,8 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $params = $request->except('data_excluido');
+        return $this->clienteRepository->atualizar($params, $id);
     }
 
     /**
@@ -80,6 +70,6 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->clienteRepository->excluir($id);
     }
 }
