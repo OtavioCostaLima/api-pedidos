@@ -19,6 +19,7 @@ class CreateClientesTable extends Migration
             $table->string('cpf', 11)->unique();
             $table->string('sexo', 1);
             $table->string('email', 100)->unique();
+            $table->date( 'data_excluido');
 
             $table->timestamps();
         });

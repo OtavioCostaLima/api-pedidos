@@ -19,6 +19,7 @@ class CreateProdutosTable extends Migration
             $table->string('cor', 20);
             $table->integer('tamanho'); // tamanho em centímetros
             $table->decimal('valor', 8, 2);
+            $table->date( 'data_excluido');
             $table->timestamps();
         });
     }
