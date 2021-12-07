@@ -24,7 +24,7 @@ class ClienteRepository
             $cliente = $this->cliente->all();
             return $this->success('Todos os Clientes', $cliente);
         } catch (\Throwable $th) {
-            return $this->error('Erro ao buscar Clientes', $th->getCode());
+            return $this->error('Erro ao buscar Clientes', 500);
         }
     }
 
@@ -36,7 +36,7 @@ class ClienteRepository
             }
             return $this->error('Cliente não encontrado', 404);
         } catch (\Throwable $th) {
-            return $this->error('Erro ao buscar Cliente', $th->getCode());
+            return $this->error('Erro ao buscar Cliente', 500);
         }
     }
 
@@ -46,7 +46,7 @@ class ClienteRepository
             $cliente = $this->cliente->create($data);
             return $this->success('Cliente Cadastrado!', $cliente, 201);
         } catch (\Throwable $th) {
-            return $this->error('Erro ao Cadastrar Cliente', $th->getCode());
+            return $this->error('Erro ao Cadastrar Cliente', 500);
         }
     }
 
@@ -62,7 +62,7 @@ class ClienteRepository
                 return $this->success('Cliente Atualizado!', $cliente);
             }
         } catch (\Throwable $th) {
-            return $this->error('Erro ao Atualizar o Cliente', $th->getCode());
+            return $this->error('Erro ao Atualizar o Cliente', 500);
         }
     }
 

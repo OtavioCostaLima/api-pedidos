@@ -1,12 +1,20 @@
 <?php
 
-namespace App\Dominio\V1\Produto;
+namespace App\Dominio\V1\Produtos;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
+    protected $produtoRepository;
+
+    public function __construct(ProdutoRepository $produtoRepository)
+    {
+        $this->produtoRepository = $produtoRepository;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +22,7 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->produtoRepository->getProdutos();
     }
 
     /**
@@ -33,9 +31,10 @@ class ProdutoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProdutoRequest $request)
     {
-        //
+        $params = $request->except('data_excluido');
+        return $this->produtoRepository->cadastrar($params);
     }
 
     /**
@@ -46,18 +45,7 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->produtoRepository->getProdutoPorId($id);
     }
 
     /**
@@ -69,7 +57,8 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $params = $request->except('data_excluido');
+        return $this->produtoRepository->atualizar($params, $id);
     }
 
     /**
@@ -80,6 +69,6 @@ class ProdutoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->produtoRepository->excluir($id);
     }
 }
