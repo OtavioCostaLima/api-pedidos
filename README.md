@@ -29,4 +29,21 @@ Você pode rodar a aplicação usando o comando `php artisan serve` ou atraves d
 
 `Para fazer o download da Postman API` [Clique Aqui](https://documenter.getpostman.com/view/5217365/UVJkBt3r) 
 
-
+## Rotas
+ POST     | api/v1/clientes              
+GET|HEAD  | api/v1/clientes             
+GET|HEAD  | api/v1/clientes/{cliente}   
+PUT|PATCH | api/v1/clientes/{cliente}    
+DELETE    | api/v1/clientes/{cliente}    
+GET|HEAD  | api/v1/pedidos               
+POST      | api/v1/pedidos              
+POST      | api/v1/pedidos/{id}/report   
+POST      | api/v1/pedidos/{id}/sendmail 
+PUT|PATCH | api/v1/pedidos/{pedido}     
+DELETE    | api/v1/pedidos/{pedido}      
+GET|HEAD  | api/v1/pedidos/{pedido}     
+GET|HEAD  | api/v1/produtos              
+POST      | api/v1/produtos              
+PUT|PATCH | api/v1/produtos/{produto}    
+DELETE    | api/v1/produtos/{produto}    
+GET|HEAD  | api/v1/produtos/{produto}    
