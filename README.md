@@ -25,6 +25,13 @@ Para gerar as tabelas do banco de dados rode o comando:
     
 Você pode rodar a aplicação usando o comando `php artisan serve` ou atraves de um servidor web.
 
+Rode o comando `php artisan db:seed` para povoar o banco com alguns registros.
+
+## TDD
+
+Use o `comando php artisan test` para rodas os Testes da API.
+
+## Download da API e Collection
 `Para fazer o download da Postman Collection` [Clique Aqui](https://www.getpostman.com/collections/2902791b5b5df1198692) 
 
 `Para fazer o download da Postman API` [Clique Aqui](https://documenter.getpostman.com/view/5217365/UVJkBt3r) 
