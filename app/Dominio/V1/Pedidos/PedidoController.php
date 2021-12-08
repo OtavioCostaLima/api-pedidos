@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class PedidoController extends Controller
 {
+    protected $pedidoRepository;
+
+    public function __construct(PedidoRepository $pedidoRepository)
+    {
+        $this->pedidoRepository = $pedidoRepository;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +22,7 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->pedidoRepository->getPedidos();
     }
 
     /**
@@ -33,9 +31,10 @@ class PedidoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PedidoRequest $request)
     {
-        //
+        $params = $request->except('data_excluido');
+        return $this->pedidoRepository->cadastrar($params);
     }
 
     /**
@@ -46,18 +45,7 @@ class PedidoController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->pedidoRepository->getPedidoPorId($id);
     }
 
     /**
@@ -69,7 +57,8 @@ class PedidoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $params = $request->except('data_excluido');
+        return $this->pedidoRepository->atualizar($params, $id);
     }
 
     /**
@@ -80,6 +69,6 @@ class PedidoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->pedidoRepository->excluir($id);
     }
 }

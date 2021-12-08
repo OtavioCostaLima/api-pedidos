@@ -16,7 +16,7 @@ class Pedido extends Model
 
     protected $fillable = [
         'cliente_id',
-        'observacoes', 'forma_pagamento', 'data_excluido',
+        'observacao', 'forma_pagamento', 'data_excluido',
     ];
 
     public function cliente(): BelongsTo
@@ -24,7 +24,7 @@ class Pedido extends Model
         return $this->belongsTo(Cliente::class);
     }
 
-    public function items(): HasMany
+    public function produtos(): HasMany
     {
         return $this->hasMany(ItensPedido::class, 'pedido_id');
     }
