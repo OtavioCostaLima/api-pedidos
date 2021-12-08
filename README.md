@@ -17,9 +17,9 @@ Entre na pasta do projeto com o terminal e digite o comando:
 
     composer install 
 
-Agora crie um bando de dados no MySQL com o nome de sua preferencia e configure o arquivo `.env` com as credencias do banco de dados e do serviço de email de sua preferencia.
+Agora crie um bando de dados no MySQL com o nome de sua preferencia e configure o arquivo `.env` com as credenciais do banco de dados e do serviço de email de sua preferencia.
 
-Para gerar as tabelas do banco de dados ode o comando:
+Para gerar as tabelas do banco de dados rode o comando:
 
     php artisan migrate
     
