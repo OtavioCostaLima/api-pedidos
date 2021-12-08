@@ -91,26 +91,29 @@ class PedidoRepository
                 return $this->error('Pedido não encontrado', 404);
             }
 
-            $produto = new Produto();
-            ItensPedido::where('pedido_id', $pedido->id)->delete();
+            if (isset($data['produtos'])) {
+                $produto = new Produto();
+                ItensPedido::where('pedido_id', $pedido->id)->delete();
 
-            foreach ($data['produtos'] as $item) {
+                foreach ($data['produtos'] as $item) {
 
-                $produto = $produto->find($item['produto_id']);
+                    $produto = $produto->find($item['produto_id']);
 
-                if (!$produto) {
-                    DB::rollBack();
-                    return $this->error('Erro ao Cadastrar Pedido, Produto não Encontrado!', 404);
+                    if (!$produto) {
+                        DB::rollBack();
+                        return $this->error('Erro ao Cadastrar Pedido, Produto não Encontrado!', 404);
+                    }
+
+                    $pedido->produtos()->create([
+                        'produto_id' => $produto->id,
+                        'descricao_produto' => $produto->nome,
+                        'quantidade' => $item['quantidade'],
+                        'valor_unitario' => $produto->valor,
+                        'valor_total' =>  $item['quantidade'] * $produto->valor,
+                    ]);
                 }
-
-                $pedido->produtos()->create([
-                    'produto_id' => $produto->id,
-                    'descricao_produto' => $produto->nome,
-                    'quantidade' => $item['quantidade'],
-                    'valor_unitario' => $produto->valor,
-                    'valor_total' =>  $item['quantidade'] * $produto->valor,
-                ]);
             }
+
             DB::commit();
             return $this->success('Pedido Atualizado!', $pedido);
         } catch (\Throwable $th) {
