@@ -8,10 +8,12 @@ use Illuminate\Http\Request;
 class PedidoController extends Controller
 {
     protected $pedidoRepository;
+    protected $pedidoServices;
 
-    public function __construct(PedidoRepository $pedidoRepository)
+    public function __construct(PedidoRepository $pedidoRepository, PedidoServices $pedidoServices)
     {
         $this->pedidoRepository = $pedidoRepository;
+        $this->pedidoServices = $pedidoServices;
     }
 
 
@@ -70,5 +72,10 @@ class PedidoController extends Controller
     public function destroy($id)
     {
         return $this->pedidoRepository->excluir($id);
+    }
+
+    public function enviarPedidoPorEmail($id)
+    {
+        return $this->pedidoServices->enviarPedidoPorEmail($id);
     }
 }
