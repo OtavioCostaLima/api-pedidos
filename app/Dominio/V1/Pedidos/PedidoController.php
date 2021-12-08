@@ -78,4 +78,9 @@ class PedidoController extends Controller
     {
         return $this->pedidoServices->enviarPedidoPorEmail($id);
     }
+
+    public function enviarPedidoEmPDF($id)
+    {
+        return $this->pedidoServices->enviarPedidoEmPDF($id);
+    }
 }
